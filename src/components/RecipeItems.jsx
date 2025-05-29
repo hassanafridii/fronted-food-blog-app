@@ -5,6 +5,7 @@ import { BsFillStopwatchFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { axiosInstance } from '../lib/axios';
 
 
 
@@ -22,7 +23,7 @@ const RecipeItems = () => {
   },[recipes])
 
     const onDelete=async(id)=>{
-      await axios.delete(`http://localhost:5000/recipe/${id}`)
+      await axiosInstance.delete(`/recipe/${id}`)
       .then((res)=>console.log(res))
         setAllRecipes(recipes => recipes.filter(recipe => recipe._id !== id))
        let filterItem = favItems.filter(recipe => recipe._id !== id)
@@ -44,7 +45,7 @@ const RecipeItems = () => {
         allRecipes?.map((item,index)=>{
             return(
                             <div key={index} className='card'onDoubleClick={()=>navigate(`/recipe/${item._id}`)}>
-                <img src={`http://localhost:5000/images/${item.coverImage}`} width='120px' height='100px' alt="" />
+                <img src={`${import.meta.env.VITE_API_URL}/images/${item.coverImage}`} width='120px' height='100px' alt="" />
                 <div className="card-body">
                     <div className="title">{item.title}</div>
                     <div className='icons'>

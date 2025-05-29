@@ -6,10 +6,11 @@ import MainNavigation from './components/MainNavigation'
 import AddFoodRecipe from './Pages/AddFoodRecipe'
 import axios from "axios"
 import EditRecipe from './Pages/EditRecipe'
+import { axiosInstance } from './lib/axios'
 
 const getAllRecipes = async()=>{
   let allRecipes=[]
-  await axios.get('http://localhost:5000/recipe').then(res=>{
+  await axiosInstance.get('/recipe').then(res=>{
     allRecipes=res.data
   })
   return allRecipes
